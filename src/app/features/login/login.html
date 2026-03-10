@@ -1,0 +1,26 @@
+<div>
+  <form [formGroup]="fg" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="username">name</label>
+      <input type="text" id="username" formControlName="username" placeholder="name" />
+    </div>
+    @if (username?.touched && username?.invalid) {
+        <div>
+          <span>username must be at least 6 characters long</span>
+        </div>
+      }
+    <div>
+      <label for="password">Password</label>
+      
+      <input type="text" id="password" formControlName="password" placeholder="Password" />
+      @if (password?.touched && password?.invalid) {
+        <div>
+          <span>Password must be at least 6 characters long</span>
+        </div>
+      }
+    </div>
+    <div>
+      <button>login</button>
+    </div>
+  </form>
+</div>
