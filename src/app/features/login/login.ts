@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Users } from '../../core/services/users';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class Login {
   fg: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private users: Users) {
     this.fg = this.fb.group({
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -25,6 +26,15 @@ export class Login {
     //   console.log('Form is invalid');
     // }
     console.log('submit');
+    this.users.getUsers().subscribe(
+      {
+      next: (data) => console.log('users', data),
+      error: (err) => console.error('Error fetching users', err)
+    }
+    // data=>{
+    //   console.log('users', data);
+    // }
+  );
     if (this.fg.valid) {
       console.log('todo', this.fg);
       console.log('con get', this.fg.get('username'));
